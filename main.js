@@ -4,14 +4,21 @@ new Vue({
     el: '#app',
     template: `<div id="#app">
     <top-bar :turn="turn" :current-player-index="currentPlayerIndex" :players="players"/>
+    <div class="world">
+    <castle v-for="(player,index) in players" :key="index" :player="player" :index="index"/>
+    <div class="land"/>
+    </div>
     <transition name="hand">
     <hand :cards="testHand" v-if="!activeOverlay" @card-play="testPlayCard"/>
     </transition>
-    <overlay v-if="activeOverlay">
-    <overlay-content-player-turn v-if="activeOverlay === 'player-turn'" :player="currentPlayer"/>
-    <overlay-content-last-play v-if="activeOverlay === 'last-play'" :opponent="currentOpponent"/>
-    <overlay-content-game-over v-if="activeOverlay === 'game-over'" :players="players"/>
+    <transition name="zoom">
+    <overlay v-if="activeOverlay" :key="activeOverlay">
+    <component :is="'overlay-content-' + activeOverlay" :player="currentPlayer" :opponent="currentOpponent" :players="players"/>
     </overlay>
+    </transition>
+    <transition name="fade">
+    <div class="overlay-background" v-if="activeOverlay"/>
+    </transition>
     </div>`,
     data: state,
     computed: {

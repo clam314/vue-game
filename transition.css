@@ -63,3 +63,14 @@
     opacity: 0;
     transform: translateX(-106px) translateY(-300px) scale(1.5);
 }
+
+.zoom-enter-active,
+.zoom-leave-active {
+    transition: opacity .3s, transform .3s;
+}
+
+.zoom-enter,
+.zoom-leave-to {
+    opacity: 0;
+    transform: scale(.7);
+}

@@ -7,6 +7,7 @@ var currentPlayingCard = null
 
 // The consolidated state of our app
 var state = {
+  canPlay: false,
   // World
   worldRatio: getWorldRatio(),
   // TODO Other things
@@ -43,5 +44,10 @@ var state = {
   },
   get currentOpponent() {
     return state.players[state.currentOpponentId]
+  },
+  drawPile: pile,
+  discardPile: {},
+  get currentHand() {
+    return state.currentPlayer.hand
   }
 }

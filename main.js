@@ -7,6 +7,9 @@ new Vue({
     <div class="world">
     <castle v-for="(player,index) in players" :key="index" :player="player" :index="index"/>
     <div class="land"/>
+    <div class="clouds">
+    <cloud v-for="index in 10" :key="index" :type="(index-1)%5+1"/>
+    </div>
     </div>
     <transition name="hand">
     <hand :cards="testHand" v-if="!activeOverlay" @card-play="testPlayCard"/>
@@ -57,3 +60,12 @@ new Vue({
         this.testHand = this.createTestHand()
     }
 })
+
+
+// Tween.js
+requestAnimationFrame(animate);
+
+function animate(time) {
+    requestAnimationFrame(animate);
+    TWEEN.update(time);
+}
